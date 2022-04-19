@@ -8,7 +8,7 @@
 (source "melpa")
 (source "jcs-elpa")
 
-(depends-on "emacs" "26.1")
+(depends-on "emacs" "27.1")
 (depends-on "vertico")
 (depends-on "flx")
 (depends-on "flx-style")
