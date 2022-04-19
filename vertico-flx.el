@@ -4,7 +4,7 @@
 ;; Created date 2022-04-19 17:15:39
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; Description: flx integration for vertico
+;; Description: flx integration for vertico.
 ;; Keyword: vertico flx
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "24.3") (flx-style "0.1.1"))
@@ -27,12 +27,25 @@
 
 ;;; Commentary:
 ;;
-;;
+;; flx integration for vertico.
 ;;
 
 ;;; Code:
 
+(require 'flx-style)
 
+
+
+(defvar jcs-minibuf--old-completion-style nil
+  "Different completion style when completing using minbuffer.")
+
+(jcs-add-hook 'minibuffer-setup-hook
+  (setq jcs-minibuf--old-completion-style completion-styles
+        completion-styles '(flx))
+  )
+
+(jcs-add-hook 'minibuffer-exit-hook
+  (setq completion-styles jcs-minibuf--old-completion-style))
 
 (provide 'vertico-flx)
 ;;; vertico-flx.el ends here
