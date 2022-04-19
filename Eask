@@ -1,6 +1,6 @@
 (package "vertico-flx"
          "0.1.0"
-         "flx integration for vertico")
+         "Flx integration for vertico")
 
 (package-file "vertico-flx.el")
 
@@ -12,6 +12,8 @@
 (depends-on "vertico")
 (depends-on "flx")
 (depends-on "flx-style")
+(depends-on "f")
 (depends-on "ht")
+(depends-on "mbs")
 
 (setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
