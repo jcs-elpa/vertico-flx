@@ -8,7 +8,7 @@
 
 ## 🔨 Usage
 
-Put the following line to your `init.el`.
+Put the following line to your `init.el`:
 
 ```elisp
 (vertico-flx-mode 1)
