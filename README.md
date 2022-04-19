@@ -6,6 +6,14 @@
 
 [![CI](https://github.com/jcs-elpa/vertico-flx/actions/workflows/test.yml/badge.svg)](https://github.com/jcs-elpa/vertico-flx/actions/workflows/test.yml)
 
+## 🔨 Usage
+
+Put the following line to your `init.el`.
+
+```elisp
+(vertico-flx-mode 1)
+```
+
 ## Contribute
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
