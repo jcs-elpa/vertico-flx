@@ -7,7 +7,7 @@
 ;; Description: Flx integration for vertico.
 ;; Keyword: vertico flx
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "26.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0"))
+;; Package-Requires: ((emacs "26.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0") (f "0.20.0") (mbs "0.1.0"))
 ;; URL: https://github.com/jcs-elpa/vertico-flx
 
 ;; This file is NOT part of GNU Emacs.
@@ -32,7 +32,9 @@
 
 ;;; Code:
 
+(require 'f)
 (require 'ht)
+(require 'mbs)
 
 (require 'vertico)
 (require 'flx)
@@ -52,6 +54,18 @@
 
 (defvar vertico-flx--old-sort-function nil
   "Record the old `vertico-sort-function'.")
+
+;;
+;; (@* "Util" )
+;;
+
+(defun vertico-flx--directory-p (path)
+  "Return non-nil if PATH is a directory path."
+  (and (file-exists-p path) (file-directory-p path)))
+
+;;
+;; (@* "Fuzzy Sorting" )
+;;
 
 (defun vertico-flx--sort-candidates-by-function (candidates prefix fnc &optional flip)
   "Sort CANDIDATES with PREFIX and FNC.
@@ -80,16 +94,25 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
         (setq candidates (append candidates cands)))))
   candidates)
 
+(defun vertico-flx--sort-file-directory (input all)
+  "Sort directory on top."
+  (if (string-empty-p input)
+      (sort (sort all #'string-lessp)
+            (lambda (var1 var2)
+              (and (string-suffix-p "/" var1)
+                   (not (string-suffix-p "/" var2)))))
+    #'vertico-sort-length-alpha))
+
 (defun vertico-flx--sort-function (all)
   "Sort candidates ALL."
   (setq vertico-flx--sorting nil)
   (let ((input (minibuffer-contents)) base)
     (cond
-     ((jcs-M-x-p) (setq base #'vertico-sort-history-length-alpha))
-     ((jcs-finding-file-p)
-      (setq input (if (and (string-suffix-p "/" input) (jcs-directory-p input)) ""
+     ((mbs-M-x-p) (setq base #'vertico-sort-history-length-alpha))
+     ((mbs-finding-file-p)
+      (setq input (if (and (string-suffix-p "/" input) (vertico-flx--directory-p input)) ""
                     (f-filename input))
-            base (jcs-vertico--sort-file-directory input all))))
+            base (vertico-flx--sort-file-directory input all))))
     ;; Final output
     (if (string-empty-p input)  ; Empty, return raw
         (if (null base) all
@@ -98,6 +121,10 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
       (setq vertico-flx--sorting t)
       ;; Return fuzzy order
       (vertico-flx--sort-candidates-by-function all input #'flx-score))))
+
+;;
+;; (@* "Entry" )
+;;
 
 (defun vertico-flx--minibuffer-setup ()
   "Hook for minibuffer setup."
