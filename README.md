@@ -1,5 +1,5 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![JCS-ELPA](https://raw.githubusercontent.com/jcs-emacs/jcs-elpa/master/badges/v/vertico-flx.svg)](https://jcs-emacs.github.io/jcs-elpa/#/vertico-flx)
+[![JCS-ELPA](https://raw.githubusercontent.com/jcs-emacs/badges/master/elpa/v/vertico-flx.svg)](https://jcs-emacs.github.io/jcs-elpa/#/vertico-flx)
 
 # vertico-flx
 > flx integration for vertico
