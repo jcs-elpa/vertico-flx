@@ -144,7 +144,7 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 
 (defun vertico-flx--disable ()
   "Disable `vertico-flx-mode'."
-  (setq vertico-sort-function vertico-flx--old-sort-functio)  ; revert
+  (setq vertico-sort-function vertico-flx--old-sort-function)  ; revert
   (remove-hook 'minibuffer-setup-hook #'vertico-flx--minibuffer-setup)
   (remove-hook 'minibuffer-exit-hook #'vertico-flx--minibuffer-exit))
 
