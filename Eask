@@ -2,6 +2,9 @@
          "0.1.0"
          "Flx integration for vertico")
 
+(website-url "https://github.com/jcs-elpa/vertico-flx")
+(keywords "vertico" "flx")
+
 (package-file "vertico-flx.el")
 
 (source "gnu")

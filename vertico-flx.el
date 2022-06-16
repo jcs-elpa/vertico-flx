@@ -4,11 +4,10 @@
 ;; Created date 2022-04-19 17:15:39
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; Description: Flx integration for vertico.
-;; Keyword: vertico flx
+;; URL: https://github.com/jcs-elpa/vertico-flx
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "27.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0") (f "0.20.0") (mbs "0.1.0"))
-;; URL: https://github.com/jcs-elpa/vertico-flx
+;; Keywords: vertico flx
 
 ;; This file is NOT part of GNU Emacs.
 
