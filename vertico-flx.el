@@ -7,7 +7,7 @@
 ;; URL: https://github.com/jcs-elpa/vertico-flx
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "27.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0") (f "0.20.0") (mbs "0.1.0"))
-;; Keywords: vertico flx
+;; Keywords: convenience vertico flx
 
 ;; This file is NOT part of GNU Emacs.
 
