@@ -3,7 +3,7 @@
          "Flx integration for vertico")
 
 (website-url "https://github.com/jcs-elpa/vertico-flx")
-(keywords "vertico" "flx")
+(keywords "convenience" "vertico" "flx")
 
 (package-file "vertico-flx.el")
 
