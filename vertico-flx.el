@@ -93,25 +93,13 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
         (setq candidates (append candidates cands)))))
   candidates)
 
-(defun vertico-flx--sort-file-directory (input all)
-  "Sort directory on top."
-  (if (string-empty-p input)
-      (sort (sort all #'string-lessp)
-            (lambda (var1 var2)
-              (and (string-suffix-p "/" var1)
-                   (not (string-suffix-p "/" var2)))))
-    #'vertico-sort-length-alpha))
-
 (defun vertico-flx--sort-function (all)
   "Sort candidates ALL."
   (setq vertico-flx--sorting nil)
   (let ((input (minibuffer-contents)) base)
     (cond
      ((mbs-M-x-p) (setq base #'vertico-sort-history-length-alpha))
-     ((mbs-finding-file-p)
-      (setq input (if (and (string-suffix-p "/" input) (vertico-flx--directory-p input)) ""
-                    (f-filename input))
-            base (vertico-flx--sort-file-directory input all))))
+     )
     ;; Final output
     (if (string-empty-p input)  ; Empty, return raw
         (if (null base) all
