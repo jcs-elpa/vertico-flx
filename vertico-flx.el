@@ -137,7 +137,7 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 
 ;;;###autoload
 (define-minor-mode vertico-flx-mode
-  "Minor mode 'vertico-flx-mode'."
+  "Minor mode `vertico-flx-mode'."
   :global t
   :require 'vertico-flx-mode
   :group 'vertico-flx
