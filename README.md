@@ -8,9 +8,11 @@
 
 ## 🔨 Usage
 
-Put the following line to your `init.el`:
+Put these following lines to your `init.el`:
 
 ```elisp
+(setq vertico-sort-function #'vertico-flx-sort-default)
+
 (vertico-flx-mode 1)
 ```
 
