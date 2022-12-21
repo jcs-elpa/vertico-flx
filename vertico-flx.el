@@ -154,8 +154,8 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 
 (defun vertico-flx--enable ()
   "Enable `vertico-flx-mode'."
-  (add-hook 'minibuffer-setup-hook #'vertico-flx--minibuffer-setup)
-  (add-hook 'minibuffer-exit-hook #'vertico-flx--minibuffer-exit))
+  (add-hook 'minibuffer-setup-hook #'vertico-flx--minibuffer-setup 100)
+  (add-hook 'minibuffer-exit-hook #'vertico-flx--minibuffer-exit 100))
 
 (defun vertico-flx--disable ()
   "Disable `vertico-flx-mode'."
