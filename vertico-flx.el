@@ -137,15 +137,20 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 ;; (@* "Entry" )
 ;;
 
+(defvar vertico-flx--minibuffer-setup-p nil
+  "Flag to make sure `minibuffer-setup' is executed once.")
+
 (defun vertico-flx--minibuffer-setup (&rest _)
   "Hook for minibuffer setup."
-  (when (equal (minibuffer-depth) 1)
+  (unless vertico-flx--minibuffer-setup-p
     (setq vertico-flx--old-completion-style completion-styles
-          completion-styles '(flx))))
+          completion-styles '(flx)
+          vertico-flx--minibuffer-setup-p t)))
 
 (defun vertico-flx--minibuffer-exit (&rest _)
   "Hook for minibuffer exit."
-  (setq completion-styles vertico-flx--old-completion-style))
+  (setq completion-styles vertico-flx--old-completion-style
+        vertico-flx--minibuffer-setup-p nil))
 
 (defun vertico-flx--enable ()
   "Enable `vertico-flx-mode'."
