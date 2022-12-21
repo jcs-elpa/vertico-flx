@@ -139,8 +139,9 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 
 (defun vertico-flx--minibuffer-setup (&rest _)
   "Hook for minibuffer setup."
-  (setq vertico-flx--old-completion-style completion-styles
-        completion-styles '(flx)))
+  (when (equal (minibuffer-depth) 1)
+    (setq vertico-flx--old-completion-style completion-styles
+          completion-styles '(flx))))
 
 (defun vertico-flx--minibuffer-exit (&rest _)
   "Hook for minibuffer exit."
