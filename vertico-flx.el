@@ -6,7 +6,7 @@
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; URL: https://github.com/jcs-elpa/vertico-flx
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "27.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0") (f "0.20.0") (mbs "0.1.0"))
+;; Package-Requires: ((emacs "27.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0") (f "0.20.0") (mbs "0.1.0") (s "1.12.0"))
 ;; Keywords: convenience vertico flx
 
 ;; This file is NOT part of GNU Emacs.
@@ -34,6 +34,7 @@
 (require 'f)
 (require 'ht)
 (require 'mbs)
+(require 's)
 
 (require 'vertico)
 (require 'flx)
@@ -45,7 +46,10 @@
   :group 'convenience
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/vertico-flx"))
 
-(defvar vertico-flx--old-completion-style nil
+(defconst vertico-flx-completion-styles '(flx)
+  "Completion styles to set when completing.")
+
+(defvar vertico-flx--old-completion-styles nil
   "Different completion style when completing using minbuffer.")
 
 (defvar vertico-flx--sorting nil
@@ -143,14 +147,22 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 (defun vertico-flx--minibuffer-setup (&rest _)
   "Hook for minibuffer setup."
   (unless vertico-flx--minibuffer-setup-p
-    (setq vertico-flx--old-completion-style completion-styles
-          completion-styles '(flx)
-          vertico-flx--minibuffer-setup-p t)))
+    (setq vertico-flx--old-completion-styles completion-styles
+          completion-styles vertico-flx-completion-styles
+          vertico-flx--minibuffer-setup-p t)
+    (add-hook 'post-command-hook #'vertico-flx--post-command nil t)))
 
 (defun vertico-flx--minibuffer-exit (&rest _)
   "Hook for minibuffer exit."
-  (setq completion-styles vertico-flx--old-completion-style
+  (setq completion-styles vertico-flx--old-completion-styles
         vertico-flx--minibuffer-setup-p nil))
+
+(defun vertico-flx--post-command (&rest _)
+  "Hook for minibuffer post command."
+  (when (mbs-finding-file-p)
+    (setq completion-styles (if (s-contains-p ":" (minibuffer-contents))
+                                '(basic flx)
+                              vertico-flx-completion-styles))))
 
 (defun vertico-flx--enable ()
   "Enable `vertico-flx-mode'."
