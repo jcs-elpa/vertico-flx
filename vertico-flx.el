@@ -160,7 +160,7 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 (defun vertico-flx--post-command (&rest _)
   "Hook for minibuffer post command."
   (when (mbs-finding-file-p)
-    (setq completion-styles (if (s-contains-p ":" (minibuffer-contents))
+    (setq completion-styles (if (mbs-tramp-p)
                                 '(basic flx)
                               vertico-flx-completion-styles))))
 
