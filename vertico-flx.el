@@ -59,13 +59,6 @@
 ;; (@* "Util" )
 ;;
 
-(defmacro vertico-flx--with-minibuffer-env (&rest body)
-  "Execute BODY with minibuffer variables."
-  (declare (indent 0) (debug t))
-  `(let ((prompt (minibuffer-prompt))
-         (contents (minibuffer-contents)))
-     ,@body))
-
 (defun vertico-flx--directory-p (path)
   "Return non-nil if PATH is a directory path."
   (and (file-exists-p path) (file-directory-p path)))
@@ -108,7 +101,7 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 ;;;###autoload
 (defun vertico-flx-sort-default (all)
   "Sort candidates ALL."
-  (vertico-flx--with-minibuffer-env
+  (mbs-with-minibuffer-env
     (setq vertico-flx--sorting nil)
     (let ((base #'vertico-sort-history-length-alpha))
       ;; Final output
@@ -123,7 +116,7 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
 ;;;###autoload
 (defun vertico-flx-sort-files (all)
   "Sort candidates ALL for files."
-  (vertico-flx--with-minibuffer-env
+  (mbs-with-minibuffer-env
     (setq vertico-flx--sorting nil)
     (let ((input (if (and (string-suffix-p "/" contents)
                           (vertico-flx--directory-p contents))
@@ -150,7 +143,7 @@ If optional argument FLIP is non-nil, reverse query and pattern order."
     (setq vertico-flx--old-completion-styles completion-styles
           completion-styles vertico-flx-completion-styles
           vertico-flx--minibuffer-setup-p t)
-    (add-hook 'post-command-hook #'vertico-flx--post-command nil t)))
+    (add-hook 'post-command-hook #'vertico-flx--post-command 5 t)))
 
 (defun vertico-flx--minibuffer-exit (&rest _)
   "Hook for minibuffer exit."
