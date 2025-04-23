@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "vertico-flx"
          "0.1.0"
          "Flx integration for vertico")
