@@ -6,7 +6,7 @@
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; URL: https://github.com/jcs-elpa/vertico-flx
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "27.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0") (f "0.20.0") (mbs "0.1.0") (s "1.12.0"))
+;; Package-Requires: ((emacs "28.1") (vertico "0.22") (flx "0.5") (flx-style "0.1.1") (ht "2.0") (f "0.20.0") (mbs "0.1.0") (s "1.12.0"))
 ;; Keywords: convenience vertico flx
 
 ;; This file is NOT part of GNU Emacs.
