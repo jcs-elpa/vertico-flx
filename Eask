@@ -12,7 +12,7 @@
 (script "test" "echo \"Error: no test specified\" && exit 1")
 
 (source 'gnu)
-(source melpa)
+(source 'melpa)
 (source 'jcs-elpa)
 
 (depends-on "emacs" "28.1")
